@@ -28,13 +28,13 @@ class Chain:
 
     def insert(self, item, position):
         node = Node(item)
-        current = self.head.next
-        previous = self.head
-        p = 0
+        current = self.head
+        previous = None
+        p = 1
 
         while p < position:
             previous = current
-            current = current.next
+            current = current.get_next()
             p += 1
         else:
             node.set_next(current)
@@ -56,4 +56,5 @@ chain.add('A')
 chain.add('B')
 chain.add('C')
 chain.insert('3', 3)
+chain.insert('4', 3)
 chain.print()
