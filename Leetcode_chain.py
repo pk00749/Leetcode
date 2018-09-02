@@ -17,11 +17,12 @@ class Node:
     def set_value(self, value):
         self.value = value
 
+
 class Chain:
     def __init__(self):
         self.head = None
 
-    def add(self,item):
+    def add(self, item):
         node = Node(item)
         node.set_next(self.head)
         self.head = node
@@ -40,6 +41,31 @@ class Chain:
             node.set_next(current)
             previous.set_next(node)
 
+    def remove(self, item):
+        current = self.head
+        previous = Node(None)
+
+        while current.get_value() != item:
+            previous = current
+            current = current.get_next()
+        else:
+            previous.set_next(current.get_next())
+
+    def modify(self, before, after):
+        current = self.head
+        while current.get_value() != before:
+            current = current.get_next()
+        else:
+            current.set_value(after)
+
+    def get_length(self):
+        current = self.head
+        chain_len = 0
+        while current:
+            current = current.get_next()
+            chain_len += 1
+        return chain_len
+
     def print(self):
         node = self.head
         print("Head >", node.get_value())
@@ -57,4 +83,9 @@ chain.add('B')
 chain.add('C')
 chain.insert('3', 3)
 chain.insert('4', 3)
+
+chain.modify('4', '10')
+# chain.remove('3')
+# chain.remove('4')
+print(chain.get_length())
 chain.print()
