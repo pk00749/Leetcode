@@ -34,10 +34,10 @@ class Chain:
 
         while p < position:
             previous = current
-            current = current.get_next()
+            current = current.next
             p += 1
         else:
-            node.set_next(previous.get_next())
+            node.set_next(current)
             previous.set_next(node)
 
     def print(self):
@@ -55,4 +55,5 @@ chain = Chain()
 chain.add('A')
 chain.add('B')
 chain.add('C')
+chain.insert('3', 3)
 chain.print()
