@@ -28,18 +28,19 @@ class Chain:
         self.head = node
 
     def insert(self, item, position):
-        node = Node(item)
-        current = self.head
-        previous = None
-        p = 1
+        if self.get_length() > 0:
+            node = Node(item)
+            current = self.head
+            previous = None
+            p = 1
 
-        while p < position:
-            previous = current
-            current = current.get_next()
-            p += 1
-        else:
-            node.set_next(current)
-            previous.set_next(node)
+            while p < position:
+                previous = current
+                current = current.get_next()
+                p += 1
+            else:
+                node.set_next(current)
+                previous.set_next(node)
 
     def remove(self, item):
         current = self.head
@@ -47,7 +48,11 @@ class Chain:
 
         while current.get_value() != item:
             previous = current
-            current = current.get_next()
+            if current.get_next() is not None:
+                current = current.get_next()
+            else:
+                print("No this value so that cannot remove")
+                break
         else:
             previous.set_next(current.get_next())
 
@@ -66,6 +71,12 @@ class Chain:
             chain_len += 1
         return chain_len
 
+    def isEmpty(self):
+        if self.get_length() == 0:
+            return True
+        else:
+            return False
+
     def print(self):
         node = self.head
         print("Head >", node.get_value())
@@ -78,14 +89,13 @@ class Chain:
 
 
 chain = Chain()
+print(chain.isEmpty())
 chain.add('A')
 chain.add('B')
 chain.add('C')
 chain.insert('3', 3)
 chain.insert('4', 3)
-
 chain.modify('4', '10')
-# chain.remove('3')
-# chain.remove('4')
+chain.remove('4')
 print(chain.get_length())
 chain.print()
